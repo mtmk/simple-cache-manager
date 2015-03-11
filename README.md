@@ -1,5 +1,7 @@
 # Simple Cache Manager .Net
 
+[![Build status](https://ci.appveyor.com/api/projects/status/sf5iy7rm6yr130aq?svg=true)](https://ci.appveyor.com/project/mtmk/simple-cache-manager)
+
 This is a very simple cache manager example with expiration. It is a thin wrapper around a dictionary.
 
 ```cs
