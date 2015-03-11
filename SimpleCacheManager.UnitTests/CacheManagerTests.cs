@@ -29,10 +29,10 @@ namespace SimpleCacheManager.UnitTests
             var expected = fixture.Create<string>();
 
             var cacheManager = new CacheManager<string>();
-            cacheManager.Add("x", expected, new DateTime(1,1,1), TimeSpan.FromSeconds(1));
+            cacheManager.Add("x", expected, new DateTime(1, 1, 1), TimeSpan.FromSeconds(1));
 
             string data = cacheManager.GetData("x");
-            
+
             Assert.Equal(expected, data);
         }
 
@@ -46,7 +46,7 @@ namespace SimpleCacheManager.UnitTests
             cacheManager.Add("x", expected, new DateTime(1, 1, 1), TimeSpan.FromSeconds(1));
 
             bool contains = cacheManager.Contains("x");
-            
+
             Assert.True(contains);
         }
 
@@ -62,6 +62,20 @@ namespace SimpleCacheManager.UnitTests
 
             Assert.False(cacheManager.Contains("x1"));
             Assert.True(cacheManager.Contains("x2"));
+        }
+
+        [Fact]
+        public void Happy_path()
+        {
+            var cacheManager = new CacheManager<string>();
+            cacheManager.Add("key1", "value1", DateTime.UtcNow, TimeSpan.FromSeconds(300));
+            cacheManager.Add("key2", "value2", DateTime.UtcNow, TimeSpan.FromSeconds(600));
+
+            Assert.True(cacheManager.Contains("key1"));
+            Assert.True(cacheManager.Contains("key1"));
+
+            Assert.Equal("value1", cacheManager.GetData("key1"));
+            Assert.Equal("value1", cacheManager.GetData("key1"));
         }
     }
 }
