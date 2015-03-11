@@ -25,12 +25,13 @@ namespace SimpleCacheManager
         public void Add(string key, T item, DateTime utcNow, TimeSpan lifeSpan)
         {
             _data.AddOrUpdate(key, item, (k, v) => item);
-            _expirationQueue.Add(new ExpirationCount(key, utcNow, lifeSpan));
-
-            if (!_expirationQueue[0].IsOld(utcNow)) return;
-
+            
             lock (_sync)
             {
+                _expirationQueue.Add(new ExpirationCount(key, utcNow, lifeSpan));
+
+                if (!_expirationQueue[0].IsOld(utcNow)) return;
+
                 int i = 0;
                 foreach (var expirationCount in _expirationQueue)
                 {
