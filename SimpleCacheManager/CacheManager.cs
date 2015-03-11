@@ -22,6 +22,11 @@ namespace SimpleCacheManager
             return item;
         }
 
+        public void Add(string key, T item, TimeSpan lifeSpan)
+        {
+            Add(key, item, DateTime.UtcNow, lifeSpan);
+        }
+
         public void Add(string key, T item, DateTime utcNow, TimeSpan lifeSpan)
         {
             _data.AddOrUpdate(key, item, (k, v) => item);

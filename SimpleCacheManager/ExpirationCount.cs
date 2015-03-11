@@ -4,12 +4,12 @@ namespace SimpleCacheManager
 {
     class ExpirationCount
     {
-        private readonly DateTime _utcNowTimeStamp;
+        private readonly DateTime _timeStamp;
         private readonly TimeSpan _lifeSpan;
 
-        internal ExpirationCount(string key, DateTime utcNowTimeStamp, TimeSpan lifeSpan)
+        internal ExpirationCount(string key, DateTime utcNow, TimeSpan lifeSpan)
         {
-            _utcNowTimeStamp = utcNowTimeStamp;
+            _timeStamp = utcNow;
             _lifeSpan = lifeSpan;
             Key = key;
         }
@@ -18,7 +18,7 @@ namespace SimpleCacheManager
 
         internal bool IsOld(DateTime utcNow)
         {
-            return (utcNow - _utcNowTimeStamp) > _lifeSpan;
+            return (utcNow - _timeStamp) > _lifeSpan;
         }
     }
 }

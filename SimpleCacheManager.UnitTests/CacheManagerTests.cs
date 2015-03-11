@@ -68,8 +68,8 @@ namespace SimpleCacheManager.UnitTests
         public void Happy_path()
         {
             var cacheManager = new CacheManager<string>();
-            cacheManager.Add("key1", "value1", DateTime.UtcNow, TimeSpan.FromSeconds(300));
-            cacheManager.Add("key2", "value2", DateTime.UtcNow, TimeSpan.FromSeconds(600));
+            cacheManager.Add("key1", "value1", TimeSpan.FromSeconds(300));
+            cacheManager.Add("key2", "value2", TimeSpan.FromSeconds(600));
 
             Assert.True(cacheManager.Contains("key1"));
             Assert.True(cacheManager.Contains("key1"));
